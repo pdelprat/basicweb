@@ -1,5 +1,5 @@
 const express = require('express');
-const morgan = require('morgan');
+const morganBody = require('morgan-body');
 const { json, urlencoded } = require('body-parser');
 require('./dispatcher');
 
@@ -8,7 +8,7 @@ var app = express();
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
-app.use(morgan('dev'));
+morganBody(app);
 
 app.use('/', express.static('public'));
 
