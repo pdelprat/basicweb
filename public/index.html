@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>Test event</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="msg"></div>
+    <div id="row"></div>
+    <script>this._source = new EventSource('/event');
+        this._source.addEventListener('change', function (e) {
+            console.log('event change', e.data);
+            var data = JSON.parse(e.data);
+            console.log(data);
+            switch (data.action) {
+                case "add":
+                    $("#row").append(data.message);
+                    break;
+                case "toast":
+                    $("#msg").append(data.message);
+                    break;
+                default: break;
+            }
+
+        });
+    </script>
+</body>
+
+</html>
